@@ -52,3 +52,9 @@ tables and applying rules called normal forms.
 | Borrower No.(PK) | Borrower<br> Name | Borrower<br> Address                | Borrower<br> Status |     |
 | ---------------- | ----------------- | ----------------------------------- | ------------------- | --- |
 | BN1721           | Ben<br> Jones     | 28<br> Low Road, Nottingham NG5 3PB | Allowed             |     |
+
+**ERD DIAGRAM**
+
+
+
+![Screenshot 2026-02-19 164742.png](C:\Users\HP\Pictures\Screenshots\Screenshot%202026-02-19%20164742.png)

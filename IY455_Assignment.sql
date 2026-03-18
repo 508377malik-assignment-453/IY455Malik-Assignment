@@ -250,3 +250,28 @@ INSERT INTO DVD (dvdNo, dvdTitle, starringActor, dvdYear, rentalCategory) VALUES
   ('DN0122', 'Into the Wild', 'Emile Hirsch', 2007, 'Adventure'),
   ('DN0172', 'The Imitation Game', 'Benedict Cumberbatch', 2014, 'Biography'),
   ('DN077', 'Central Intelligence', 'Dwayne Johnson', 2016, 'Action');
+
+INSERT INTO BORROWER (borrowerNo, borrowerName, borrowerAddress, borrowerStatus) VALUES
+  ('BW001', 'James Carter',   '14 Maple Street, Nottingham, NG1 2AB',  'Active'),
+  ('BW002', 'Sarah Mitchell', '27 Elm Road, Derby, DE1 3CD',           'Active'),
+  ('BW003', 'Tom Hughes',     '5 Oak Avenue, Leicester, LE2 4EF',      'Active'),
+  ('BW004', 'Emma Wilson',    '88 Pine Lane, Sheffield, S1 5GH',       'Suspended'),
+  ('BW005', 'Daniel Brown',   '33 Birch Close, Nottingham, NG3 6IJ',   'Active'),
+  ('BW006', 'Laura Evans',    '19 Cedar Drive, Coventry, CV1 7KL',     'Active'),
+  ('BW007', 'Ryan Scott',     '61 Willow Way, Birmingham, B1 8MN',     'Active'),
+  ('BW008', 'Hannah Clarke',  '7 Ash Court, Nottingham, NG5 9OP',      'Inactive'),
+  ('BW009', 'Chris Taylor',   '42 Chestnut Rise, Leeds, LS1 1QR',      'Active'),
+  ('BW010', 'Mia Johnson',    '3 Sycamore Place, Nottingham, NG7 2ST', 'Active');
+
+
+INSERT INTO LOAN (loanNo, borrowerNo, loan_date) VALUES
+  ('LN001', 'BW001', '2024-01-05'),
+  ('LN002', 'BW002', '2024-01-10'),
+  ('LN003', 'BW003', '2024-01-15'),
+  ('LN004', 'BW004', '2024-01-18'),
+  ('LN005', 'BW005', '2024-02-01'),
+  ('LN006', 'BW006', '2024-02-07'),
+  ('LN007', 'BW007', '2024-02-14'),
+  ('LN008', 'BW008', '2024-02-20'),
+  ('LN009', 'BW009', '2024-03-01'),
+  ('LN010', 'BW010', '2024-03-10');

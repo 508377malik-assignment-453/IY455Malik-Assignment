@@ -275,3 +275,21 @@ INSERT INTO LOAN (loanNo, borrowerNo, loan_date) VALUES
   ('LN008', 'BW008', '2024-02-20'),
   ('LN009', 'BW009', '2024-03-01'),
   ('LN010', 'BW010', '2024-03-10');
+
+INSERT INTO LOAN_DVD (loanNo, dvdNo, copyNo, shelfPosition, dvdStatus, returnDueDate, actualReturn_date, fineCharge) VALUES
+  ('LN001', 'DN050',   'C001', 'A1-01', 'Returned',  '2024-01-12', '2024-01-11', 0.00),
+  ('LN002', 'DN0135',  'C002', 'B2-03', 'Returned',  '2024-01-17', '2024-01-20', 0.00),
+  ('LN003', 'DN0171',  'C003', 'C3-05', 'Returned',  '2024-01-22', '2024-01-22', 0.00),
+  ('LN004', 'DN0102',  'C004', 'A2-02', 'Overdue',   '2024-01-25', NULL,         0.00),
+  ('LN005', 'DN0188',  'C005', 'D1-07', 'Returned',  '2024-02-08', '2024-02-06', 0.00),
+  ('LN006', 'DN025',   'C006', 'B3-04', 'Returned',  '2024-02-14', '2024-02-16', 0.00),
+  ('LN007', 'DN0157',  'C007', 'C1-09', 'OnLoan',    '2024-02-21', NULL,         0.00),
+  ('LN008', 'DN083',   'C008', 'A3-06', 'Returned',  '2024-02-27', '2024-02-25', 0.00),
+  ('LN009', 'DN039',   'C009', 'D2-08', 'Returned',  '2024-03-08', '2024-03-07', 0.00),
+  ('LN010', 'DN0114',  'C010', 'B1-10', 'OnLoan',    '2024-03-17', NULL,         0.00);
+
+SELECT * FROM DVD;
+SELECT * FROM RENTAL_CATEGORY;
+SELECT * FROM LOAN_DVD;
+SELECT * FROM LOAN;
+SELECT * FROM BORROWER;

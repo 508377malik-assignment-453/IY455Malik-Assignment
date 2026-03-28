@@ -8,6 +8,7 @@ CREATE TABLE RENTAL_CATEGORY(
     returnDueDate DATE NOT NULL,
     finePerDay DECIMAL(5,2) NOT NULL,
     actualReturnDate DATE NULL,
+    borrowerFineCharged DECIMAL (5,2) NOT NULL,
     PRIMARY KEY (rentalCategory)
 );
 
@@ -35,4 +36,12 @@ CREATE TABLE LOAN(
     loanDate DATE NOT NULL,
     PRIMARY KEY (loanNo),
     FOREIGN KEY (borrowerNo) REFERENCES BORROWER (borrowerNo)
+);
+
+CREATE TABLE COPY(
+    copyNo VARCHAR(10) NOT NULL,
+    dvdNo VARCHAR(10) NOT NULL,
+    shelfPosition VARCHAR(10) NOT NULL,
+    PRIMARY KEY (copyNo),
+    FOREIGN KEY (dvdNo) REFERENCES DVD (dvdNo)
 );

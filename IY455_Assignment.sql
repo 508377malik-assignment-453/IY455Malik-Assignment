@@ -153,6 +153,13 @@ INSERT INTO LOAN_LINE (loanNo, copyNo, returnDueDate, actualReturnDate, borrower
 ('LN10009', 'CN2017', '2024-02-01', NULL,          0.00),
 ('LN10010', 'CN2019', '2024-02-04', '2024-02-06', 4.00);
 
+SELECT * FROM RENTAL_CATEGORY;
+SELECT * FROM BORROWER;
+SELECT * FROM COPY;
+SELECT * FROM LOAN;
+SELECT * FROM DVD;
+SELECT * FROM LOAN_LINE;
+
 SELECT
     b.borrowerNo,
     b.borrowerName,

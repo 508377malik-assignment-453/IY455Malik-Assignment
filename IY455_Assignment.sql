@@ -152,3 +152,100 @@ INSERT INTO LOAN_LINE (loanNo, copyNo, returnDueDate, actualReturnDate, borrower
 ('LN10008', 'CN2015', '2024-01-29', '2024-01-29', 0.00),
 ('LN10009', 'CN2017', '2024-02-01', NULL,          0.00),
 ('LN10010', 'CN2019', '2024-02-04', '2024-02-06', 4.00);
+
+SELECT
+    b.borrowerNo,
+    b.borrowerName,
+    b.borrowerAddress,
+    b.borrowerStatus,
+    l.loanNo,
+    l.loanDate,
+    d.dvdTitle,
+    ll.returnDueDate
+FROM BORROWER b
+JOIN LOAN l ON b.borrowerNo = l.borrowerNo
+JOIN LOAN_LINE ll ON l.loanNo = ll.loanNo
+JOIN COPY c  ON ll.copyNo = c.copyNo
+JOIN DVD d  ON c.dvdNo = d.dvdNo
+WHERE ll.actualReturnDate IS NULL
+ORDER BY b.borrowerName;
+
+SELECT
+    b.borrowerNo,
+    b.borrowerName,
+    b.borrowerAddress,
+    COUNT(ll.copyNo) AS overdueItems,
+    SUM(ll.borrowerFine) AS totalFineSoFar
+FROM BORROWER b
+JOIN LOAN l  ON b.borrowerNo = l.borrowerNo
+JOIN LOAN_LINE  ll ON l.loanNo = ll.loanNo
+WHERE ll.actualReturnDate IS NULL
+  AND ll.returnDueDate < CURDATE()
+GROUP BY b.borrowerNo, b.borrowerName, b.borrowerAddress
+ORDER BY overdueItems DESC;
+
+SELECT
+    b.borrowerNo,
+    b.borrowerName,
+    b.borrowerAddress,
+    b.borrowerStatus,
+    d.dvdTitle,
+    d.dvdStarring,
+    rc.rentalCategory,
+    l.loanDate
+FROM BORROWER b
+JOIN LOAN l  ON b.borrowerNo = l.borrowerNo
+JOIN LOAN_LINE ll ON l.loanNo = ll.loanNo
+JOIN COPY c  ON ll.copyNo = c.copyNo
+JOIN DVD d  ON c.dvdNo = d.dvdNo
+JOIN RENTAL_CATEGORY rc ON d.rentalCategory = rc.rentalCategory
+WHERE rc.rentalCategory = 'Comedy'
+  AND l.loanDate >= DATE_SUB(CURDATE(), INTERVAL 4 WEEK)
+ORDER BY b.borrowerName;
+
+
+SELECT
+    b.borrowerNo,
+    b.borrowerName,
+    b.borrowerAddress,
+    b.borrowerStatus,
+    SUM(ll.borrowerFine) AS totalFines
+FROM BORROWER b
+JOIN LOAN l  ON b.borrowerNo = l.borrowerNo
+JOIN LOAN_LINE  ll ON l.loanNo = ll.loanNo
+WHERE ll.borrowerFine > 0
+GROUP BY b.borrowerNo, b.borrowerName, b.borrowerAddress, b.borrowerStatus
+ORDER BY totalFines DESC
+LIMIT 1;
+
+
+UPDATE RENTAL_CATEGORY
+SET rentalCost = 5.50
+WHERE rentalCategory = 'Superhero';
+
+SELECT rentalCategory, rentalCost
+FROM RENTAL_CATEGORY
+WHERE rentalCategory = 'Superhero';
+
+DELETE FROM COPY
+WHERE dvdNo IN (
+    SELECT d.dvdNo
+    FROM DVD d
+    LEFT JOIN COPY c ON d.dvdNo  = c.dvdNo
+    LEFT JOIN LOAN_LINE ll ON c.copyNo = ll.copyNo
+    WHERE ll.loanNo IS NULL
+);
+
+DELETE FROM DVD
+WHERE dvdNo NOT IN (
+    SELECT DISTINCT d.dvdNo
+    FROM DVD d
+    JOIN COPY c  ON d.dvdNo = c.dvdNo
+    JOIN LOAN_LINE ll ON c.copyNo = ll.copyNo
+);
+
+SELECT d.dvdNo, d.dvdTitle
+FROM DVD d
+JOIN COPY c ON d.dvdNo  = c.dvdNo
+JOIN LOAN_LINE ll ON c.copyNo = ll.copyNo
+GROUP BY d.dvdNo, d.dvdTitle;
